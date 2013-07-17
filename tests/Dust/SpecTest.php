@@ -37,7 +37,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "should test one basic reference",
             "source" => "{?one}{one}{/one}",
-            "context" => (object)["one" => 0],
+            "context" => (object)[
+                "one" => 0
+            ],
             "expected" => "0",
             "message" => "should test one basic reference"
         ];
@@ -113,9 +115,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "use . for creating a block and use it to set params",
             "source" => "{#. test=\"you\"}{name} {test}{/.}",
-            "context" => (object)[
-                "name" => "me"
-            ],
+            "context" => (object)["name" => "me"],
             "expected" => "me you",
             "message" => ". creating a block"
         ];
@@ -156,9 +156,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "base_template",
             "source" => "Start{~n}{+title}Base Title{/title}{~n}{+main}Base Content{/main}{~n}End",
-            "context" => (object)[
-                
-            ],
+            "context" => (object)[],
             "expected" => "Start\nBase Title\nBase Content\nEnd",
             "message" => "should test base template"
         ];
@@ -172,7 +170,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "child_template",
             "source" => "{^xhr}{>base_template/}{:else}{+main/}{/xhr}{<title}Child Title{/title}{<main}Child Content{/main}",
-            "context" => (object)["xhr" => false],
+            "context" => (object)[
+                "xhr" => false
+            ],
             "expected" => "Start\nChild Title\nChild Content\nEnd",
             "message" => "should test child template"
         ];
@@ -239,7 +239,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
                 },
                 "projects" => [
                     (object)["name" => "Mayhem"],
-                    (object)["name" => "Flash"],
+                    (object)[
+                        "name" => "Flash"
+                    ],
                     (object)["name" => "Thunder"]
                 ]
             ],
@@ -384,7 +386,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "null is treated as empty in exists",
             "source" => "{?scalar}true{:else}false{/scalar}",
-            "context" => (object)["scalar" => null],
+            "context" => (object)[
+                "scalar" => null
+            ],
             "expected" => "false",
             "message" => "should test null as empty in exists section"
         ];
@@ -447,7 +451,10 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "Dust syntax error",
             "source" => "RRR {##}",
-            "context" => (object)["name" => "Mick", "count" => 30],
+            "context" => (object)[
+                "name" => "Mick",
+                "count" => 30
+            ],
             "error" => "Expected buffer, comment, partial, reference, section or special but \"{\" found. At line : 1, column : 5",
             "message" => "should test that the error message shows line and column."
         ];
@@ -458,9 +465,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "scalar null in a # section",
             "source" => "{#scalar}true{:else}false{/scalar}",
-            "context" => (object)[
-                "scalar" => null
-            ],
+            "context" => (object)["scalar" => null],
             "expected" => "false",
             "message" => "should test for a scalar null in a # section"
         ];
@@ -534,7 +539,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "scalar true value in the # section",
             "source" => "{#scalar}true{:else}false{/scalar}",
-            "context" => (object)["scalar" => true],
+            "context" => (object)[
+                "scalar" => true
+            ],
             "expected" => "true",
             "message" => "shoud test for scalar true value in the # section"
         ];
@@ -573,9 +580,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "name" => "empty array is treated as empty in exists",
             "source" => "{?array}true{:else}false{/array}",
             "context" => (object)[
-                "array" => [
-                    
-                ]
+                "array" => []
             ],
             "expected" => "false",
             "message" => "empty array is treated as empty in exists"
@@ -670,7 +675,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "source" => "{#names}{title} {name}{~n}{/names}",
             "context" => (object)[
                 "title" => "Sir",
-                "names" => []
+                "names" => [
+                    
+                ]
             ],
             "expected" => "",
             "message" => "should test an empty array"
@@ -688,10 +695,10 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
                     (object)[
                         "name" => "Moe"
                     ],
+                    (object)["name" => "Larry"],
                     (object)[
-                        "name" => "Larry"
-                    ],
-                    (object)["name" => "Curly"]
+                        "name" => "Curly"
+                    ]
                 ]
             ],
             "expected" => "Sir Moe\nSir Larry\nSir Curly\n",
@@ -725,7 +732,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "context" => (object)[
                 "do" => (object)[
                     "re" => [
-                        (object)["mi" => "hello!"],
+                        (object)[
+                            "mi" => "hello!"
+                        ],
                         "bye!"
                     ]
                 ]
@@ -746,7 +755,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
                         (object)[
                             "mi" => [
                                 "one",
-                                (object)["fa" => "hello!"]
+                                (object)[
+                                    "fa" => "hello!"
+                                ]
                             ]
                         ],
                         "bye!"
@@ -786,9 +797,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
                             "biz" => "123"
                         ]
                     ],
-                    [
-                        (object)["biz" => "345"]
-                    ]
+                    [(object)["biz" => "345"]]
                 ]
             ],
             "expected" => "123345",
@@ -807,9 +816,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
                     (object)[
                         "name" => "Moe"
                     ],
-                    (object)[
-                        "name" => "Larry"
-                    ],
+                    (object)["name" => "Larry"],
                     (object)[
                         "name" => "Curly"
                     ]
@@ -828,13 +835,11 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "context" => (object)[
                 "title" => "Sir",
                 "names" => [
+                    (object)["name" => "Moe"],
+                    (object)["name" => "Larry"],
                     (object)[
-                        "name" => "Moe"
-                    ],
-                    (object)[
-                        "name" => "Larry"
-                    ],
-                    (object)["name" => "Curly"]
+                        "name" => "Curly"
+                    ]
                 ]
             ],
             "expected" => "Size=(3).Sir Moe\nSize=(3).Sir Larry\nSize=(3).Sir Curly\n",
@@ -885,9 +890,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "source" => "{#names}Idx={\$idx} Size=({\$len}).{title} {.}{~n}{/names}",
             "context" => (object)[
                 "title" => "Sir",
-                "names" => [
-                    
-                ]
+                "names" => []
             ],
             "expected" => "",
             "message" => "test array reference \$idx/\$len on empty array case"
@@ -932,14 +935,10 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "context" => (object)[
                 "results" => [
                     (object)[
-                        "info" => (object)[
-                            "name" => "Steven"
-                        ]
+                        "info" => (object)["name" => "Steven"]
                     ],
                     (object)[
-                        "info" => (object)[
-                            "name" => "Richard"
-                        ]
+                        "info" => (object)["name" => "Richard"]
                     ]
                 ]
             ],
@@ -1061,18 +1060,12 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "source" => "{#list3}{.[\$idx].biz}{/list3}",
             "context" => (object)[
                 "list3" => [
-                    [
-                        (object)[
-                            "biz" => "123"
-                        ]
-                    ],
+                    [(object)["biz" => "123"]],
                     [
                         (object)[
                             "biz" => "345"
                         ],
-                        (object)[
-                            "biz" => "456"
-                        ]
+                        (object)["biz" => "456"]
                     ]
                 ]
             ],
@@ -1089,19 +1082,17 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "context" => (object)[
                 "list3" => [
                     [
-                        (object)[
-                            "idx" => "0"
-                        ],
-                        (object)["idx" => "1"],
-                        (object)["idx" => "2"]
-                    ],
-                    [
-                        (object)[
-                            "idx" => "0"
-                        ],
+                        (object)["idx" => "0"],
                         (object)[
                             "idx" => "1"
                         ],
+                        (object)[
+                            "idx" => "2"
+                        ]
+                    ],
+                    [
+                        (object)["idx" => "0"],
+                        (object)["idx" => "1"],
                         (object)["idx" => "2"]
                     ]
                 ]
@@ -1145,9 +1136,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "name" => "conditional",
             "source" => "{?tags}<ul>{~n}{#tags}{~s} <li>{.}</li>{~n}{/tags}</ul>{:else}No Tags!{/tags}{~n}{^likes}No Likes!{:else}<ul>{~n}{#likes}{~s} <li>{.}</li>{~n}{/likes}</ul>{/likes}",
             "context" => (object)[
-                "tags" => [
-                    
-                ],
+                "tags" => [],
                 "likes" => [
                     "moe",
                     "larry",
@@ -1166,9 +1155,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "name" => "empty_else_block",
             "source" => "{#foo}full foo{:else}empty foo{/foo}",
             "context" => (object)[
-                "foo" => [
-                    
-                ]
+                "foo" => []
             ],
             "expected" => "empty foo",
             "message" => "should test else block when array empty"
@@ -1334,11 +1321,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
                 "x" => 30,
                 "a" => (object)[
                     "b" => (object)[
-                        "c" => (object)[
-                            "d" => (object)[
-                                "e" => "1"
-                            ]
-                        ]
+                        "c" => (object)["d" => (object)["e" => "1"]]
                     ]
                 ]
             ],
@@ -1380,11 +1363,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
                     "x" => 30,
                     "a" => (object)[
                         "b" => (object)[
-                            "c" => (object)[
-                                "d" => (object)[
-                                    "e" => "1"
-                                ]
-                            ]
+                            "c" => (object)["d" => (object)["e" => "1"]]
                         ]
                     ]
                 ]
@@ -1616,7 +1595,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "ignore whitespaces also means ignoring eol",
             "source" => "{#authors \nname=\"theAuthors\"\nlastname=\"authorlastname\" \nmaxtext=300}\n{>\"otherTemplate\"/}\n{/authors}",
-            "context" => (object)[],
+            "context" => (object)[
+                
+            ],
             "expected" => "",
             "message" => "should ignore eol"
         ];
@@ -1713,7 +1694,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "context" => (object)[
                 "val1" => "title",
                 "val2" => "A",
-                "obj" => (object)["name" => "B"]
+                "obj" => (object)[
+                    "name" => "B"
+                ]
             ],
             "expected" => "BBB\n",
             "message" => "should test blocks with dynamic key values as objects"
@@ -1856,10 +1839,10 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
             "source" => "{#first-names}{name}{/first-names}",
             "context" => (object)[
                 "first-names" => [
+                    (object)["name" => "Moe"],
                     (object)[
-                        "name" => "Moe"
+                        "name" => "Larry"
                     ],
-                    (object)["name" => "Larry"],
                     (object)[
                         "name" => "Curly"
                     ]
@@ -1875,7 +1858,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "support dash in a referece for exists section",
             "source" => "{?tags-a}tag found!{:else}No Tags!{/tags-a}",
-            "context" => (object)["tags-a" => "tag"],
+            "context" => (object)[
+                "tags-a" => "tag"
+            ],
             "expected" => "tag found!",
             "message" => "should test for dash in a referece for exists section"
         ];
@@ -1932,7 +1917,9 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "buffer: does not ignore line feed",
             "source" => "Hi {name}:\n   you won a blue car",
-            "context" => (object)["name" => "Jairo"],
+            "context" => (object)[
+                "name" => "Jairo"
+            ],
             "expected" => "Hi Jairo:\n   you won a blue car",
             "message" => "Buffer should not ignore line feed"
         ];
@@ -1943,9 +1930,7 @@ class SpecTest extends \PHPUnit_Framework_TestCase {
         $test = (object)[
             "name" => "buffer: does not ignore line feed and carriage",
             "source" => "Hi {name}:\r\n   you won a blue car",
-            "context" => (object)[
-                "name" => "Jairo"
-            ],
+            "context" => (object)["name" => "Jairo"],
             "expected" => "Hi Jairo:\r\n   you won a blue car",
             "message" => "Buffer should not ignore line feed and carriage"
         ];
